@@ -54,6 +54,7 @@ angular.module('rmsSystem').controller('StationsCtrl', function ($scope, station
 	$scope.cities = areas;
 	$scope.stations = [];
 	$scope.sensors = [6,8,24];
+	
 	$scope.isNew = function () {
 		return !!!$scope.model.id;
 	};
@@ -85,6 +86,7 @@ angular.module('rmsSystem').controller('StationsCtrl', function ($scope, station
 
 		if ($scope.isNew()) {
 			$scope.model.active = true;
+			$scope.model.coordinates = Object.keys($scope.model.coordinates).map(function (key) { return $scope.model.coordinates[key]; });
 			Station.create($scope.model).then(function () {
 				$state.go('admin.station', {id: $scope.model.stationCode});
 			}, function () {
